@@ -79,6 +79,7 @@ public class ProceduralTextureGeneration : MonoBehaviour {
 			m_generatedTexture = _GenerateProceduralTexture();
 			material.SetTexture("_MainTex", m_generatedTexture);
 		}
+        Debug.Log("计算一次");
 	}
 
 	private Color _MixColor(Color color0, Color color1, float mixFactor) {

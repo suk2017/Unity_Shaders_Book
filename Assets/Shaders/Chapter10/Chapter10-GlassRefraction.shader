@@ -1,9 +1,12 @@
-﻿Shader "Unity Shaders Book/Chapter 10/Glass Refraction" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Unity Shaders Book/Chapter 10/Glass Refraction" {
 	Properties {
 		_MainTex ("Main Tex", 2D) = "white" {}
 		_BumpMap ("Normal Map", 2D) = "bump" {}
 		_Cubemap ("Environment Cubemap", Cube) = "_Skybox" {}
-		_Distortion ("Distortion", Range(0, 100)) = 10
+		_Distortion ("Distortion", Range(0, 10000)) = 10
 		_RefractAmount ("Refract Amount", Range(0.0, 1.0)) = 1.0
 	}
 	SubShader {
@@ -50,14 +53,14 @@
 			
 			v2f vert (a2v v) {
 				v2f o;
-				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
 				
 				o.scrPos = ComputeGrabScreenPos(o.pos);
 				
 				o.uv.xy = TRANSFORM_TEX(v.texcoord, _MainTex);
 				o.uv.zw = TRANSFORM_TEX(v.texcoord, _BumpMap);
 				
-				float3 worldPos = mul(_Object2World, v.vertex).xyz;  
+				float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;  
 				fixed3 worldNormal = UnityObjectToWorldNormal(v.normal);  
 				fixed3 worldTangent = UnityObjectToWorldDir(v.tangent.xyz);  
 				fixed3 worldBinormal = cross(worldNormal, worldTangent) * v.tangent.w; 
