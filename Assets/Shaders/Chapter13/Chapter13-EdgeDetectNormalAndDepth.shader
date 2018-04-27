@@ -75,7 +75,7 @@ Shader "Unity Shaders Book/Chapter 13/Edge Detection Normals And Depth" {
 			half4 sample2 = tex2D(_CameraDepthNormalsTexture, i.uv[2]);
 			half4 sample3 = tex2D(_CameraDepthNormalsTexture, i.uv[3]);
 			half4 sample4 = tex2D(_CameraDepthNormalsTexture, i.uv[4]);
-			
+		
 			half edge = 1.0;
 			
 			edge *= CheckSame(sample1, sample2);

@@ -28,7 +28,7 @@ public class EdgeDetectNormalsAndDepth : PostEffectsBase {
 	void OnEnable() {
 		GetComponent<Camera>().depthTextureMode |= DepthTextureMode.DepthNormals;
 	}
-
+    
 	[ImageEffectOpaque]
 	void OnRenderImage (RenderTexture src, RenderTexture dest) {
 		if (material != null) {
